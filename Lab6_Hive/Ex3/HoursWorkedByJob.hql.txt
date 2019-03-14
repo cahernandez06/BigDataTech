@@ -1,0 +1,21 @@
+DROP TABLE ChicagoData;
+
+CREATE EXTERNAL TABLE ChicagoData(name STRING,jobTitle STRING,dpt STRING,typeJob STRING,
+typeIncome STRING,hours INT,annualSalary DOUBLE,hourlyRate DECIMAL(8,2))  
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+WITH SERDEPROPERTIES('separatorChar' = ',','quoteChar' = '\"','escapeChar' = '\\')  
+STORED AS TEXTFILE LOCATION '/home/cloudera/cs523/input/ChicagoData.csv' 
+TBLPROPERTIES ('skip.header.line.count' = '1');
+
+LOAD DATA LOCAL INPATH '/home/cloudera/cs523/input/ChicagoData.csv'  OVERWRITE INTO TABLE ChicagoData;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/home/cloudera/cs523/output' 
+row format delimited 
+FIELDS TERMINATED BY '\t'
+SELECT jobTitle, SUM(hours) AS sumHours
+FROM ChicagoData 
+WHERE typeincome='Hourly'
+  AND hours <> 0
+GROUP BY jobTitle
+ORDER BY sumHours DESC
+LIMIT 10;	
