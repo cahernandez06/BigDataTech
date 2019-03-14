@@ -1,0 +1,14 @@
+Get Started
+The tutorial below guides you through some analytic use cases, using the most popular open source tools 
+included with CDH (including Cloudera Impala, Cloudera Search, and Hue). 
+
+Analyze Your Data
+Hue is the open source web interface for Hadoop that lets you analyze your data. Simply load in your data 
+and then easily begin to analyze, search, and visualize it. In the QuickStart VM, the administrative username 
+for Hue is 'cloudera' and the password is 'cloudera'.
+
+Manage Your Cluster
+Cloudera Manager provides end-to-end system management for simple deployment and administration of CDH. Cloudera 
+Manager also seamlessly integrates with existing third-party tools.
+
+Click "Launch Cloudera Express" or "Launch Cloudera Enterprise (trial)" on the Desktop to get started.
