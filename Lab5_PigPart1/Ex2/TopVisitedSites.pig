@@ -1,0 +1,10 @@
+users = LOAD '/home/cloudera/Desktop/users.csv' AS (user:chararray,age:int);
+sites = LOAD '/home/cloudera/Desktop/pages.csv' AS (page:chararray,username:chararray);
+usersfiltered = FILTER users BY age > 17 AND age < 26;
+usersites = JOIN usersfiltered BY $0, sites BY $1;
+projection = FOREACH usersites GENERATE $2,$3;
+groupBag = GROUP projection BY $0;
+countsites = FOREACH groupBag GENERATE $0, COUNT($1);
+sitessorted = ORDER countsites BY $1 DESC;
+top5sites = LIMIT sitessorted 5;
+STORE top5sites INTO '/home/cloudera/Desktop/top5sites' USING PigStorage(',');
