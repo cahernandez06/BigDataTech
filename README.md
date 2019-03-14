@@ -1,2 +1,7 @@
-# BigDataTech
-Big Data Technologies course taken at Maharishi University of Management (Master)
+# BigDataTechnologies-Labs
+
+## Intro to MapReduce
+
+# Prerequisites
+Virtual machine with Linux-Cloudera 6 running
+
